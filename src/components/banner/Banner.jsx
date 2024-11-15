@@ -3,6 +3,8 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import useFetch from '@/utils/useFetch';
+import { base_img } from '@/app/api/image_url';
 
 function Banner() {
   const settings = {
@@ -30,19 +32,20 @@ function Banner() {
       text: "Explore Endless Possibilities",
     },
   ];
+  const {data,loading} = useFetch("/notice/80")
 
   return (
     <div className="relative">
       <Slider {...settings}>
-        {slidesData.map((slide, index) => (
-          <div key={index} className="w-full h-[80vh] relative">
+        {data?.data.map((slide, index) => (
+          <div key={index} className="w-full h-[60vh] relative">
             <img
-              src={slide.image}
+              src={base_img+slide.image}
               alt="slide"
               className="w-full h-full object-cover"
             />
             <div className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white text-4xl sm:text-5xl lg:text-6xl font-bold max-w-md">
-              {slide.text}
+              {slide.title}
             </div>
           </div>
         ))}
