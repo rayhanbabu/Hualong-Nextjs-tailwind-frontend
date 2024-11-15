@@ -4,19 +4,17 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { AiFillCaretDown } from "react-icons/ai";
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // Toggle dropdown visibility when hovered
-  const handleMouseEnter = () => setIsDropdownOpen(true);
-  const handleMouseLeave = () => setIsDropdownOpen(false);
+  // Toggle the mobile menu visibility
+  const toggleMenu = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
     <header>
       {/* Top Header */}
-      <div className="flex justify-between max-w-screen-xl mx-auto items-center bg-white p-4">
+      <div className="flex justify-between items-center bg-white p-4 max-w-screen-xl mx-auto">
         {/* Logo */}
         <div className="text-xl font-bold">
           <Link href="/">
@@ -41,7 +39,7 @@ function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          onClick={toggleMenu}
           className="md:hidden text-gray-700 px-3 py-2 rounded-md focus:outline-none"
         >
           ☰
@@ -50,36 +48,17 @@ function Header() {
 
       {/* Menu Bar */}
       <div className="bg-gray-300">
-        <nav className="max-w-screen-xl mx-auto md:flex md:justify-start">
-          <ul className="flex flex-col md:flex-row gap-4 p-2 md:p-0 text-xl">
+        <nav className="max-w-screen-xl mx-auto">
+          {/* Mobile menu toggle */}
+          <ul
+            className={`flex flex-col sm:flex-row gap-4 p-2 md:p-0 text-xl md:flex-row md:gap-4 ${isDropdownOpen ? 'flex' : 'hidden'} md:flex`}
+          >
             <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
               <Link href="/">Home</Link>
             </li>
             <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
               <Link href="/about-us">About us</Link>
             </li>
-
-            {/* Dropdown Menu */}
-            <li
-              className="relative"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <button className="flex items-center text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-                Products <AiFillCaretDown className="ml-2" />
-              </button>
-              {isDropdownOpen && (
-                <ul className="absolute left-0 mt-2 bg-white border border-gray-200 rounded-md shadow-lg z-10 p-1">
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                    <Link href="/products/male">Male</Link>
-                  </li>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                    <Link href="/products/female">Female</Link>
-                  </li>
-                </ul>
-              )}
-            </li>
-
             <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
               <Link href="/hr-compliance">HR compliance</Link>
             </li>
