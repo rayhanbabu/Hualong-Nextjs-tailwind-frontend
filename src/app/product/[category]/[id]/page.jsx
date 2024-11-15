@@ -1,8 +1,12 @@
 "use client"
+import useFetch from "@/utils/useFetch";
+import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
 const ProductDetailsPage = () => {
+  const {id} = useParams();
   // Dummy images for the product
+  const {data,loading} = useFetch(`/product/${id}`);
   const productImages = [
     "https://plus.unsplash.com/premium_photo-1728983986076-b3ce2963fc3e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "https://plus.unsplash.com/premium_photo-1728983986076-b3ce2963fc3e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",

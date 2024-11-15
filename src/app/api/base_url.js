@@ -1,0 +1,1 @@
+export const base_url = "https://ss.ancovabd.com/api/6"

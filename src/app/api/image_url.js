@@ -1,0 +1,1 @@
+export const base_img = "https://ss.ancovabd.com/uploads/admin/";
