@@ -87,7 +87,7 @@ function Header() {
               <Link href="/vision-mission">Vision & Mission</Link>
             </li>
             <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/contact">Contact</Link>
+              <Link href="/contact-us">Contact</Link>
             </li>
           </ul>
         </nav>
