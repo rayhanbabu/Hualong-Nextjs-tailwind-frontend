@@ -65,7 +65,8 @@ function Footer() {
 
       {/* Bottom Section */}
       <hr className="my-6 border-gray-600" />
-      <p className="text-center text-gray-400">&copy; 2024 Your Company Name. All rights reserved.</p>
+      <div className="flex flex-col sm:flex-row items-center justify-evenly"><p className="text-center ">&copy; 2024  Hualong International Industrial Co. Ltd. All rights reserved.</p>
+      <p className="text-center  mt-1">Developed By <Link href={"www.ancovabd.com"} target="_blank">ANCOVA</Link></p></div>
     </footer>
   );
 }
