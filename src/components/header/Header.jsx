@@ -11,6 +11,9 @@ function Header() {
   // Toggle the mobile menu visibility
   const toggleMenu = () => setIsDropdownOpen(!isDropdownOpen);
 
+  // Close the mobile menu
+  const closeMenu = () => setIsDropdownOpen(false);
+
   return (
     <header>
       {/* Top Header */}
@@ -54,22 +57,22 @@ function Header() {
             className={`flex flex-col sm:flex-row gap-4 p-2 md:p-0 text-xl md:flex-row md:gap-4 ${isDropdownOpen ? 'flex' : 'hidden'} md:flex`}
           >
             <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/">Home</Link>
+              <Link href="/" onClick={closeMenu}>Home</Link>
             </li>
             <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/about-us">About us</Link>
+              <Link href="/about-us" onClick={closeMenu}>About us</Link>
             </li>
             <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/hr-compliance">HR compliance</Link>
+              <Link href="/hr-compliance" onClick={closeMenu}>HR compliance</Link>
             </li>
             <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/vision-mission">Vision & Mission</Link>
+              <Link href="/vision-mission" onClick={closeMenu}>Vision & Mission</Link>
             </li>
             <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/contact-us">Contact</Link>
+              <Link href="/contact-us" onClick={closeMenu}>Contact</Link>
             </li>
             <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/member">Board of Directors</Link>
+              <Link href="/member" onClick={closeMenu}>Board of Directors</Link>
             </li>
           </ul>
         </nav>

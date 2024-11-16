@@ -48,7 +48,7 @@ function AboutUs() {
                   dangerouslySetInnerHTML={{ __html: data.data[0]?.desc || "Description not available" }}
                 ></p>
                 <button className="bg-red-700 text-white px-6 py-2 font-semibold hover:bg-red-600 transition duration-300">
-                  <Link href="/about-us">About Us</Link>
+                  <Link href="/about-us">Details</Link>
                 </button>
               </>
             )

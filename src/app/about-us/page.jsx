@@ -32,7 +32,7 @@ function About() {
         }}
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="absolute inset-0 flex items-center justify-center text-white">
+        <div className="absolute inset-0 flex items-center px-2 justify-center text-white">
           <div className="flex-col">
             <h1 className="text-5xl font-bold text-center">About Us</h1>
             <div className="text-center mt-4 text-gray-400">
@@ -45,7 +45,7 @@ function About() {
       </div>
 
       {/* Bottom Section */}
-      <div className="grid max-w-screen-xl mx-auto py-20 grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+      <div className="grid px-2 max-w-screen-xl mx-auto py-20 grid-cols-1 md:grid-cols-2 gap-8 mt-16">
         {/* Left Side: Video */}
         <div className="">
           <div className="w-full">
@@ -73,7 +73,7 @@ function About() {
                   {aboutData.data[0]?.title || "About Us Title not available"}
                 </h3>
                 <p
-                  className="text-lg text-gray-700 mb-6"
+                  className="text-lg text-gray-700  mb-6"
                   dangerouslySetInnerHTML={{
                     __html: aboutData.data[0]?.desc || "Description not available",
                   }}
