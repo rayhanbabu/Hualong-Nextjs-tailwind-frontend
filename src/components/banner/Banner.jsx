@@ -36,7 +36,7 @@ function Banner() {
         // Render Slider when data is available
         <Slider {...settings}>
           {data?.data.map((slide, index) => (
-            <div key={index} className="w-full h-[60vh] relative">
+            <div key={index} className="w-full h-[30vh] sm:h-[60vh] relative">
               <img
                 src={base_img + slide.image}
                 alt="slide"
