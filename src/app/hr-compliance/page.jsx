@@ -20,7 +20,7 @@ function HR() {
     <div>
       {/* Hero Section */}
       <div
-        className="relative w-full h-[30vh] bg-cover bg-center"
+        className="relative w-full h-[20vh] sm:h-[30vh] bg-cover bg-center"
         style={{
           backgroundImage:
             "url('https://media.istockphoto.com/id/1293366109/photo/this-one-match-perfect-with-me.jpg?s=2048x2048&w=is&k=20&c=aipF63e5nI-DxreysL9XbP9S_kYbbVeBQAw5d3qzSUs=')"
