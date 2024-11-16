@@ -7,12 +7,19 @@ import { MdEmail } from "react-icons/md";
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState("/"); // Default to "Home" as active
 
   // Toggle the mobile menu visibility
   const toggleMenu = () => setIsDropdownOpen(!isDropdownOpen);
 
   // Close the mobile menu
   const closeMenu = () => setIsDropdownOpen(false);
+
+  // Handle setting active link
+  const handleSetActive = (link) => {
+    setActiveLink(link); // Set the clicked link as active
+    closeMenu(); // Close the menu when a link is clicked (for mobile view)
+  };
 
   return (
     <header>
@@ -56,23 +63,41 @@ function Header() {
           <ul
             className={`flex flex-col sm:flex-row gap-4 p-2 md:p-0 text-xl md:flex-row md:gap-4 ${isDropdownOpen ? 'flex' : 'hidden'} md:flex`}
           >
-            <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/" onClick={closeMenu}>Home</Link>
+            <li
+              className={`text-gray-700 px-3 py-2 rounded-md cursor-pointer transition-all duration-300 
+                ${activeLink === '/' ? 'bg-red-700 text-white' : 'hover:bg-red-700 hover:text-white'}`}
+            >
+              <Link href="/" onClick={() => handleSetActive("/")}>Home</Link>
             </li>
-            <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/about-us" onClick={closeMenu}>About us</Link>
+            <li
+              className={`text-gray-700 px-3 py-2 rounded-md cursor-pointer transition-all duration-300 
+                ${activeLink === '/about-us' ? 'bg-red-700 text-white' : 'hover:bg-red-700 hover:text-white'}`}
+            >
+              <Link href="/about-us" onClick={() => handleSetActive("/about-us")}>About us</Link>
             </li>
-            <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/hr-compliance" onClick={closeMenu}>HR compliance</Link>
+            <li
+              className={`text-gray-700 px-3 py-2 rounded-md cursor-pointer transition-all duration-300 
+                ${activeLink === '/hr-compliance' ? 'bg-red-700 text-white' : 'hover:bg-red-700 hover:text-white'}`}
+            >
+              <Link href="/hr-compliance" onClick={() => handleSetActive("/hr-compliance")}>HR compliance</Link>
             </li>
-            <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/vision-mission" onClick={closeMenu}>Vision & Mission</Link>
+            <li
+              className={`text-gray-700 px-3 py-2 rounded-md cursor-pointer transition-all duration-300 
+                ${activeLink === '/vision-mission' ? 'bg-red-700 text-white' : 'hover:bg-red-700 hover:text-white'}`}
+            >
+              <Link href="/vision-mission" onClick={() => handleSetActive("/vision-mission")}>Vision & Mission</Link>
             </li>
-            <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/contact-us" onClick={closeMenu}>Contact</Link>
+            <li
+              className={`text-gray-700 px-3 py-2 rounded-md cursor-pointer transition-all duration-300 
+                ${activeLink === '/contact-us' ? 'bg-red-700 text-white' : 'hover:bg-red-700 hover:text-white'}`}
+            >
+              <Link href="/contact-us" onClick={() => handleSetActive("/contact-us")}>Contact</Link>
             </li>
-            <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
-              <Link href="/member" onClick={closeMenu}>Board of Directors</Link>
+            <li
+              className={`text-gray-700 px-3 py-2 rounded-md cursor-pointer transition-all duration-300 
+                ${activeLink === '/member' ? 'bg-red-700 text-white' : 'hover:bg-red-700 hover:text-white'}`}
+            >
+              <Link href="/member" onClick={() => handleSetActive("/member")}>Board of Directors</Link>
             </li>
           </ul>
         </nav>
