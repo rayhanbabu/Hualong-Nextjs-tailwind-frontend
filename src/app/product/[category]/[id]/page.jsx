@@ -1,111 +1,141 @@
-"use client"
+"use client";
+import React, { useState, useEffect } from "react";
+import { base_img } from "@/app/api/image_url";
 import useFetch from "@/utils/useFetch";
 import { useParams } from "next/navigation";
-import React, { useState } from "react";
 
 const ProductDetailsPage = () => {
-  const {id} = useParams();
-  // Dummy images for the product
-  const {data,loading} = useFetch(`/product/${id}`);
-  const productImages = [
-    "https://plus.unsplash.com/premium_photo-1728983986076-b3ce2963fc3e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://plus.unsplash.com/premium_photo-1728983986076-b3ce2963fc3e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://plus.unsplash.com/premium_photo-1728983986076-b3ce2963fc3e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://plus.unsplash.com/premium_photo-1728983986076-b3ce2963fc3e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  ];
+  const { id } = useParams();
+  const { data, loading } = useFetch(`/product/76`);
 
-  // State to track the selected main image
-  const [mainImage, setMainImage] = useState(productImages[0]);
+  // State to manage the modal (image modal)
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState("");
+
+  // Function to open the modal
+  const openModal = (img) => {
+    setCurrentImage(img);
+    setIsOpen(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsOpen(false);
+    setCurrentImage("");
+  };
+
+  // Skeleton loader placeholders
+  const Skeleton = ({ height = "20px", width = "100%" }) => (
+    <div
+      className="bg-gray-300 animate-pulse"
+      style={{ height, width, borderRadius: "8px" }}
+    ></div>
+  );
+
+  // Check if product data is available
+  if (loading) {
+    return (
+      <div className="max-w-screen-lg mx-auto p-8 space-y-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col items-center space-y-4">
+            <Skeleton height="300px" width="100%" />
+            <Skeleton height="300px" width="100%" />
+          </div>
+
+          <div className="flex-1 space-y-4">
+            <Skeleton height="40px" width="60%" />
+            <Skeleton height="20px" width="40%" />
+            <Skeleton height="60px" width="100%" />
+            <Skeleton height="40px" width="50%" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const {
+    title,
+    category_name,
+    image,
+    image1,
+    desc1,
+    desc2,
+  } = data.data[0];
 
   return (
     <div className="max-w-screen-lg mx-auto p-8 space-y-8">
-      
-      {/* Top Section: Product Images and Details */}
       <div className="flex flex-col lg:flex-row gap-8">
-        
-        {/* Left: Main Image and Thumbnail Images */}
-        <div className="flex flex-col items-center space-y-4">
-          
-          {/* Main Image */}
-          <div className="w-full max-w-md">
+        <div className="flex items-center space-x-4">
+          <div className="w-full">
             <img
-              src={mainImage}
+              src={base_img + image}
               alt="Main Product"
-              className="w-full h-auto object-cover rounded-lg shadow-md"
+              className="w-[150px] h-auto object-cover rounded-lg shadow-md cursor-pointer"
+              onClick={() => openModal(base_img + image)}
             />
           </div>
-          
-          {/* Thumbnail Images */}
-          <div className="flex gap-4">
-            {productImages.map((img, index) => (
+
+          {image1 && (
+            <div className="w-full">
               <img
-                key={index}
-                src={img}
-                alt={`Thumbnail ${index + 1}`}
-                onClick={() => setMainImage(img)}
-                className={`w-16 h-16 object-cover rounded-lg cursor-pointer ${
-                  mainImage === img ? "ring-2 ring-red-500" : ""
-                }`}
+                src={base_img + image1}
+                alt="Second Product"
+                className="w-[150px] h-auto object-cover rounded-lg shadow-md cursor-pointer"
+                onClick={() => openModal(base_img + image1)}
               />
-            ))}
-          </div>
+            </div>
+          )}
         </div>
-        
-        {/* Right: Product Details */}
+
         <div className="flex-1 space-y-4">
-          
-          {/* Product Title, Category, and Brand */}
-          <h1 className="text-3xl font-bold text-gray-800">Product Title</h1>
-          <p className="text-gray-600">Category: Bags</p>
-          <p className="text-gray-600">Brand: LeatherCo</p>
-          
-          {/* Request a Quote Button */}
+          <h1 className="text-3xl font-bold text-gray-800">{title}</h1>
+          <p className="text-gray-600">Category: {category_name}</p>
+
+          <div
+            className="text-gray-600 text-xl"
+            dangerouslySetInnerHTML={{ __html: desc1 }}
+          ></div>
+
           <button className="mt-4 bg-red-700 text-white py-2 px-4 rounded-lg hover:bg-red-800 transition">
             Request a Quote
           </button>
         </div>
       </div>
-      
-      {/* Bottom Section: Product Summary and Specifications */}
-      <div className="space-y-8">
-        
-        {/* Product Summary */}
+
+      <div className="space-y-8 mt-10 border-t-2 pt-5">
         <section>
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Product Summary</h2>
-          <p className="text-gray-600">
-            This premium leather bag is designed with style and durability in mind. Perfect for both casual and formal settings, it provides ample space while maintaining a sleek look. The high-quality materials ensure long-lasting wear, while the design offers both comfort and functionality.
-          </p>
-        </section>
-        
-        {/* Product Specifications */}
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Specifications</h2>
-          <table className="w-full border border-gray-300 rounded-lg overflow-hidden">
-            <tbody>
-              <tr className="bg-gray-100">
-                <td className="p-3 border-b border-gray-300 font-medium">Material</td>
-                <td className="p-3 border-b border-gray-300">100% Genuine Leather</td>
-              </tr>
-              <tr>
-                <td className="p-3 border-b border-gray-300 font-medium">Dimensions</td>
-                <td className="p-3 border-b border-gray-300">12" x 8" x 4"</td>
-              </tr>
-              <tr className="bg-gray-100">
-                <td className="p-3 border-b border-gray-300 font-medium">Weight</td>
-                <td className="p-3 border-b border-gray-300">1.2 kg</td>
-              </tr>
-              <tr>
-                <td className="p-3 border-b border-gray-300 font-medium">Color</td>
-                <td className="p-3 border-b border-gray-300">Brown</td>
-              </tr>
-              <tr className="bg-gray-100">
-                <td className="p-3 font-medium">Warranty</td>
-                <td className="p-3">2 Years</td>
-              </tr>
-            </tbody>
-          </table>
+          <div
+            className="text-gray-600 text-xl"
+            dangerouslySetInnerHTML={{ __html: desc2 }}
+          ></div>
         </section>
       </div>
+
+      {/* Custom Modal */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50"
+          onClick={closeModal} // Close the modal if clicked outside the image
+        >
+          <div
+            className="relative"
+            onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking on the image
+          >
+            <img
+              src={currentImage}
+              alt="Product"
+              className="max-w-full max-h-screen object-contain"
+            />
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

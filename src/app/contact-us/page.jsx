@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { base_url } from "../api/base_url";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function ContactUsPage() {
   // State for form data
@@ -54,6 +53,13 @@ export default function ContactUsPage() {
       const result = await response.json();
 
       if (response.ok) {
+        setFormData({
+          collor_name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          collor_des: "",
+        });
         // Handle success response
         toast.success("Form submitted successfully!");
       } else {
@@ -73,7 +79,7 @@ export default function ContactUsPage() {
     <div className="max-w-screen-xl shadow mx-auto p-8">
       {/* Page Heading */}
       <h1 className="text-4xl text-red-600 text-center mb-20">
-        We work from Saturday till Thursday from 8:00 a.m. to 5:00 p.m.
+        Contact Us
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -182,7 +188,7 @@ export default function ContactUsPage() {
       </div>
 
       {/* Toast container */}
-      <toast-container />
+      <Toaster />
     </div>
   );
 }

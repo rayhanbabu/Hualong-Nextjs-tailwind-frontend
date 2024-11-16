@@ -5,6 +5,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import useFetch from '@/utils/useFetch';
 import { base_img } from '@/app/api/image_url';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 function Banner() {
   const settings = {
@@ -18,38 +20,35 @@ function Banner() {
     arrows: false,
   };
 
-  const slidesData = [
-    {
-      image: "https://images.unsplash.com/photo-1729002129878-0eac487f42b8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      text: "Welcome to Our Platform",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1729002129878-0eac487f42b8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      text: "Innovate with Us",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1729002129878-0eac487f42b8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      text: "Explore Endless Possibilities",
-    },
-  ];
-  const {data,loading} = useFetch("/notice/80")
+  const { data, loading } = useFetch("/notice/80");
 
   return (
     <div className="relative">
-      <Slider {...settings}>
-        {data?.data.map((slide, index) => (
-          <div key={index} className="w-full h-[60vh] relative">
-            <img
-              src={base_img+slide.image}
-              alt="slide"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white text-4xl sm:text-5xl lg:text-6xl font-bold max-w-md">
-              {slide.title}
-            </div>
+      {loading ? (
+        // Show skeleton loader while data is being fetched
+        <div className="w-full h-[60vh] relative">
+          <Skeleton height="100%" width="100%" />
+          <div className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white text-4xl sm:text-5xl lg:text-6xl font-bold max-w-md">
+            <Skeleton count={1} width={300} />
           </div>
-        ))}
-      </Slider>
+        </div>
+      ) : (
+        // Render Slider when data is available
+        <Slider {...settings}>
+          {data?.data.map((slide, index) => (
+            <div key={index} className="w-full h-[60vh] relative">
+              <img
+                src={base_img + slide.image}
+                alt="slide"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white text-4xl sm:text-5xl lg:text-6xl font-bold max-w-md">
+                {slide.title}
+              </div>
+            </div>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 }

@@ -33,7 +33,7 @@ function Header() {
             <p>abcd@gmail.com</p>
           </button>
           <button className="text-white px-3 py-2 hover:bg-red-800 bg-red-700 rounded-md">
-            <Link href="/contact-us">Contact Us</Link>
+            <Link href="/contact-us">Get a Quote</Link>
           </button>
         </div>
 
@@ -67,6 +67,9 @@ function Header() {
             </li>
             <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
               <Link href="/contact-us">Contact</Link>
+            </li>
+            <li className="text-gray-700 px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer">
+              <Link href="/member">Board of Directors</Link>
             </li>
           </ul>
         </nav>

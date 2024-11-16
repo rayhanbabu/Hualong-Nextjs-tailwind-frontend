@@ -5,6 +5,11 @@ import { useRouter } from "next/navigation";
 export default function Feature() {
   const router = useRouter();
 
+  const images = [
+    "https://images.unsplash.com/photo-1533867617858-e7b97e060509?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://plus.unsplash.com/premium_photo-1667161529094-16ba30fa00a0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHNob2VzJTIwd29tZW58ZW58MHx8MHx8fDA%3D","https://plus.unsplash.com/premium_photo-1663126735125-5b2358492ab8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2hpbGR8ZW58MHx8MHx8fDA%3D"
+  ]
+
   const handleClick = (product) => {
     // Map products to their respective IDs
     const productIds = {
@@ -49,9 +54,9 @@ export default function Feature() {
               
               {/* Product Image */}
               <img
-                src="https://images.unsplash.com/photo-1473188588951-666fce8e7c68?q=80&w=1948&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={images[index]}
                 alt={product}
-                className="w-full h-auto border-t-2 mt-2"
+                className="w-full h-[300px] object-fit border-t-2 mt-2"
               />
             </div>
           ))}

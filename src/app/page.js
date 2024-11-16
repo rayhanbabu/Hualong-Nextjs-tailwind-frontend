@@ -10,7 +10,7 @@ function Home() {
       <Banner />
       <AboutUs />
       <Feature />
-      <Resources />
+      {/* <Resources /> */}
     </div>
   )
 }
