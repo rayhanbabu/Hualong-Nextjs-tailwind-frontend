@@ -45,7 +45,7 @@ function About() {
       </div>
 
       {/* Bottom Section */}
-      <div className="grid px-2 max-w-screen-xl mx-auto py-20 grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+      <div className="grid px-2 max-w-screen-xl mx-auto py-20 grid-cols-1 md:grid-cols-2 gap-8 mt-8 sm:mt-16">
         {/* Left Side: Video */}
         <div className="">
           <div className="w-full">
