@@ -45,7 +45,7 @@ const Faculty = () => {
                 <p className="text-xl">{item?.name}</p>
                 <p className="uppercase mt-3 text-yellow-400 font-bold">{item?.designation}</p>
               </div>
-              <Link href={item?.web_link || "/"} target="_blank" className="bg-red-700 px-5 text-white py-2">
+              <Link href={ `/member/${item.id}`} className="bg-red-700 px-5 text-white py-2">
                 View Profile
               </Link>
             </div>

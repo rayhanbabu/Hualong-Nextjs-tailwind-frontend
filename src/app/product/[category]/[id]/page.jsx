@@ -2,16 +2,17 @@
 import React, { useState, useEffect } from "react";
 import { base_img } from "@/app/api/image_url";
 import useFetch from "@/utils/useFetch";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 const ProductDetailsPage = () => {
-  const { id } = useParams();
-  const { data, loading } = useFetch(`/product/76`);
 
+  const {category,id} = useParams()
+  const { data, loading } = useFetch(`/product_details/${category}/${id}`);
+  console.log(data)
   // State to manage the modal (image modal)
   const [isOpen, setIsOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState("");
-
+  console.log("data",data)
   // Function to open the modal
   const openModal = (img) => {
     setCurrentImage(img);
@@ -60,7 +61,7 @@ const ProductDetailsPage = () => {
     image1,
     desc1,
     desc2,
-  } = data.data[0];
+  } = data?.data;
 
   return (
     <div className="max-w-screen-lg mx-auto p-8 space-y-8">
@@ -90,11 +91,8 @@ const ProductDetailsPage = () => {
         <div className="flex-1 space-y-4">
           <h1 className="text-3xl font-bold text-gray-800">{title}</h1>
           <p className="text-gray-600">Category: {category_name}</p>
+          <p className="text-gray-600">Product Id: {id}</p>
 
-          <div
-            className="text-gray-600 text-xl"
-            dangerouslySetInnerHTML={{ __html: desc1 }}
-          ></div>
 
           <button className="mt-4 bg-red-700 text-white py-2 px-4 rounded-lg hover:bg-red-800 transition">
             Request a Quote
@@ -107,7 +105,7 @@ const ProductDetailsPage = () => {
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Product Summary</h2>
           <div
             className="text-gray-600 text-xl"
-            dangerouslySetInnerHTML={{ __html: desc2 }}
+            dangerouslySetInnerHTML={{ __html: desc1 }}
           ></div>
         </section>
       </div>
